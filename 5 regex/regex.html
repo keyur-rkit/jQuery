@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegEx</title>
+</head>
+
+<body>
+    <h1>Regular Expression</h1>
+
+    <h2>1. Test for a Match (test)</h2>
+    <input type="text" id="testInput" placeholder="Enter a word with 'test'" />
+    <button id="btnTest">Check</button>
+    <p id="testResult"></p>
+
+    <h2>2. Match Strings (match)</h2>
+    <input type="text" id="matchInput" placeholder="Enter text to find numbers" />
+    <button id="btnMatch">Find Numbers</button>
+    <p id="matchResult"></p>
+
+    <h2>3. Search for a Substring (search)</h2>
+    <input type="text" id="searchInput" placeholder="Enter text to find 'hello'" />
+    <button id="btnSearch">Search</button>
+    <p id="searchResult"></p>
+
+    <h2>4. Replace Substring (replace)</h2>
+    <input type="text" id="replaceInput" placeholder="Enter text to replace spaces" />
+    <button id="btnReplace">Replace Spaces with '-' </button>
+    <p id="replaceResult"></p>
+
+    <script src="../jQuery/jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Test for a match
+            $('#btnTest').click(function () {
+                let input = $('#testInput').val();
+                let regex = /test/i; // Case-insensitive search for 'test'
+                let result = regex.test(input); // returns true or false
+                $('#testResult').text(result ? "The word 'test' was found." : "No match found.");
+            });
+
+            // Match strings
+            $('#btnMatch').click(function () {
+                let input = $('#matchInput').val();
+                let regex = /\d+/g; // Match one or more digits globally
+                let matches = input.match(regex);
+                $('#matchResult').text(matches ? 'Found numbers: ' + matches.join(', ') : 'No numbers found.');
+            });
+
+            // Search for a substring
+            $('#btnSearch').click(function () {
+                let input = $('#searchInput').val();
+                let regex = /hello/i; // Case-insensitive search for 'hello'
+                let position = input.search(regex);
+                $('#searchResult').text(position >= 0 ? `'hello' found at index ${position}.` : "'hello' not found.");
+            });
+
+            // Replace substring
+            $('#btnReplace').click(function () {
+                let input = $('#replaceInput').val();
+                let regex = /\s+/g; // Match one or more spaces
+                let result = input.replace(regex, '-');
+                $('#replaceResult').text('Replaced text: ' + result);
+            });
+
+        });
+    </script>
+</body>
+
+</html>

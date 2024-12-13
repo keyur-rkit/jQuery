@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery HTML Methods</title>
+    <style>
+        #myDiv {
+            border: 1px solid black;
+            padding: 10px;
+            margin-left: 10px;
+            width: 200px;
+        }
+
+        .wrapper {
+            border: 2px dashed red;
+            padding: 10px;
+        }
+
+        button {
+            display: inline-block;
+            margin: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>jQuery HTML Methods</h1>
+    <div id="myDiv">Initial Content</div>
+    <button id="btnHtml">html()</button>
+    <button id="btnText">text()</button>
+    <button id="btnVal">val()</button>
+    <input type="text" id="myInput" value="Initial Value">
+    <button id="btnAppend">append()</button>
+    <button id="btnPrepend">prepend()</button>
+    <button id="btnAttr">attr()</button>
+    <span id="myBox" style="background-color: yellow;"> box </span>
+    <button id="btnRemove">remove()</button>
+    <button id="btnEmpty">empty()</button>
+    <button id="btnClone">clone()</button>
+    <button id="btnWrap">wrap()</button>
+
+    <script src="../jQuery/jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            // html()
+            $('#btnHtml').click(function () {
+                $('#myDiv').html('<b>New HTML Content</b>');
+                alert('HTML content: ' + $('#myDiv').html());
+            });
+
+            // text()
+            $('#btnText').click(function () {
+                $('#myDiv').text('Hello, World!');
+                alert('Text content: ' + $('#myDiv').text());
+            });
+
+            // val()
+            $('#btnVal').click(function () {
+                $('#myInput').val('Updated Value');
+                alert('Input value: ' + $('#myInput').val());
+            });
+
+            // append()
+            $('#btnAppend').click(function () {
+                $('#myDiv').append('<p>Appended content</p>');
+            });
+
+            // prepend()
+            $('#btnPrepend').click(function () {
+                $('#myDiv').prepend('<p>Prepended content</p>');
+            });
+
+            // attr()
+            $('#btnAttr').click(function () {
+                $('#myBox').attr('style', 'background-color: red;');
+                alert('Box style: ' + $('#myBox').attr('style'));
+            });
+
+            // remove()
+            $('#btnRemove').click(function () {
+                $('#myDiv').remove();
+                alert('Element #myDiv removed.');
+            });
+
+            // empty()
+            $('#btnEmpty').click(function () {
+                $('#myDiv').empty();
+                alert('Content of #myDiv emptied.');
+            });
+
+            // clone()
+            $('#btnClone').click(function () {
+                let clone = $('#myDiv').clone();
+                $('body').append(clone);
+                alert('Cloned #myDiv appended to body.');
+            });
+
+            // wrap()
+            $('#btnWrap').click(function () {
+                $('#myDiv').wrap('<div class="wrapper"></div>');
+                alert('#myDiv wrapped with a div.');
+            });
+        });
+    </script>
+</body>
+
+</html>

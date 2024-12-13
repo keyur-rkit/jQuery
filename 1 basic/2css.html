@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery CSS Methods</title>
+    <style>
+        .box {
+            width: 150px;
+            height: 150px;
+            background-color: lightblue;
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid blue;
+        }
+
+        .red-border {
+            border-color: red;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        button {
+            margin: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>jQuery CSS Methods</h1>
+    <div class="box" id="myBox">Box Content</div>
+    <button id="btnCss">css()</button>
+    <button id="btnAddClass">addClass()</button>
+    <button id="btnRemoveClass">removeClass()</button>
+    <button id="btnToggleClass">toggleClass()</button>
+    <button id="btnDimensions">height() & width()</button>
+    <button id="btnVisibility">show() & hide()</button>
+    <button id="btnToggle">toggle()</button>
+    <button id="btnOuterDimensions">outerHeight() & outerWidth()</button>
+    <button id="btnHasClass">hasClass()</button>
+
+    <script src="../jQuery/jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            // css()
+            $('#btnCss').click(function () {
+                $('#myBox').css({
+                    'background-color': 'lightgreen',
+                    'color': 'darkgreen',
+                    'font-size': '18px'
+                });
+            });
+
+            // addClass()
+            $('#btnAddClass').click(function () {
+                $('#myBox').addClass('red-border');
+            });
+
+            // removeClass()
+            $('#btnRemoveClass').click(function () {
+                $('#myBox').removeClass('red-border');
+            });
+
+            // toggleClass()
+            $('#btnToggleClass').click(function () {
+                $('#myBox').toggleClass('red-border');
+            });
+
+            // height() and width()
+            $('#btnDimensions').click(function () {
+                let height = $('#myBox').height();
+                let width = $('#myBox').width();
+                alert(`Current dimensions: Height = ${height}px, Width = ${width}px`);
+                $('#myBox').height(200).width(200);
+                alert('Dimensions set to 200x200.');
+            });
+
+            // show() and hide()
+            $('#btnVisibility').click(function () {
+                if ($('#myBox').hasClass('hidden')) {
+                    $('#myBox').show().removeClass('hidden');
+                } else {
+                    $('#myBox').hide().addClass('hidden');
+                }
+            });
+
+            // toggle()
+            $('#btnToggle').click(function () {
+                $('#myBox').toggle();
+            });
+
+            // outerHeight() and outerWidth()
+            $('#btnOuterDimensions').click(function () {
+                let outerHeight = $('#myBox').outerHeight();
+                let outerWidth = $('#myBox').outerWidth();
+                alert(`Outer dimensions: Height = ${outerHeight}px, Width = ${outerWidth}px`);
+            });
+
+            // hasClass()
+            $('#btnHasClass').click(function () {
+                let hasRedBorder = $('#myBox').hasClass('red-border');
+                alert(hasRedBorder ? '#myBox has the class "red-border".' : '#myBox does not have the class "red-border".');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Methods</title>
+</head>
+
+<body>
+    <h1>AJAX Methods</h1>
+
+    <h2>1. $.ajax() with GET</h2>
+    <button id="btnAjaxGet">Run $.ajax() with GET</button>
+    <p id="ajaxGetResult"></p>
+
+    <h2>2. $.ajax() with POST</h2>
+    <button id="btnAjaxPost">Run $.ajax() with POST</button>
+    <p id="ajaxPostResult"></p>
+
+    <h2>3. $.get()</h2>
+    <button id="btnGet">Run $.get()</button>
+    <p id="getResult"></p>
+
+    <h2>4. $.post()</h2>
+    <button id="btnPost">Run $.post()</button>
+    <p id="postResult"></p>
+
+    <h2>5. $.ajax() with PUT</h2>
+    <button id="btnAjaxPut">Run $.ajax() with PUT</button>
+    <p id="ajaxPutResult"></p>
+
+    <h2>6. $.ajax() with DELETE</h2>
+    <button id="btnAjaxDelete">Run $.ajax() with DELETE</button>
+    <p id="ajaxDeleteResult"></p>
+
+
+    <script src="../jQuery/jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            // 1. Using $.ajax() with GET
+            $('#btnAjaxGet').click(function () {
+                $('#ajaxGetResult').text('Loading...');
+                $.ajax({
+                    url: 'https://api.github.com/users/saradvakeyur',
+                    method: 'GET',
+                    success: function (data) {
+                        $('#ajaxGetResult').text(`Username  : ${data.login}`);
+                    },
+                    error: function () {
+                        $('#ajaxGetResult').text('Error occurred while fetching data.');
+                    }
+                });
+            });
+
+            // 2. Using $.ajax() with POST
+            $('#btnAjaxPost').click(function () {
+                $('#ajaxPostResult').text('Loading...');
+                $.ajax({
+                    url: 'https://dummyjson.com/posts/add',
+                    method: 'POST',
+                    data: {
+                        title: 'My New Post',
+                        body: 'This is the content of my post.',
+                        userId: 1
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#ajaxPostResult').text(`Post created with ID: ${data.id}`);
+                    },
+                    error: function () {
+                        $('#ajaxPostResult').text('Error occurred while posting data.');
+                    }
+                });
+            });
+
+            // 3. Using $.get()
+            $('#btnGet').click(function () {
+                $('#getResult').text('Loading...');
+                $.get('https://api.github.com/users/saradvakeyur', function (data) {
+                    let stringData = JSON.stringify(data);
+                    $('#getResult').text(`serializedData  : ${stringData}`);
+                }).fail(function () {
+                    $('#getResult').text('Error occurred while fetching data.');
+                });
+            });
+
+            // 4. Using $.post()
+            $('#btnPost').click(function () {
+                $('#postResult').text('Posting data...');
+                $.post('https://dummyjson.com/posts/add', {
+                    title: 'My New Post',
+                    body: 'This is the content of my post.',
+                    userId: 1
+                }, function (data) {
+                    let stringData = JSON.stringify(data);
+                    $('#postResult').text(`serialized response : ${stringData}`);
+                }).fail(function () {
+                    $('#postResult').text('Error occurred while posting data.');
+                });
+            });
+
+            // 5. Using $.ajax() with PUT
+            $('#btnAjaxPut').click(function () {
+                $('#ajaxPutResult').text('Loading...');
+                $.ajax({
+                    url: 'https://dummyjson.com/posts/1',
+                    method: 'PUT',
+                    data: {
+                        title: 'Updated title',
+                        body: 'Updated body',
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        let stringData = JSON.stringify(data);
+                        $('#ajaxPutResult').text(`serialized response : ${stringData}`);
+                    },
+                    error: function () {
+                        $('#ajaxPutResult').text('Error occurred while posting data.');
+                    }
+                });
+            });
+
+            // 6. Using $.ajax() with DELETE
+            $('#btnAjaxDelete').click(function () {
+                $('#ajaxDeleteResult').text('Loading...');
+                $.ajax({
+                    url: 'https://dummyjson.com/posts/1',
+                    method: 'DELETE',
+                    success: function (data) {
+                        let stringData = JSON.stringify(data);
+                        $('#ajaxDeleteResult').text(`serialized response : ${stringData}`);
+                    },
+                    error: function () {
+                        $('#ajaxDeleteResult').text('Error occurred while posting data.');
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+
+</html>

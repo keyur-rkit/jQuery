@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Functions</title>
+</head>
+
+<body>
+    <h1>jQuery Functions</h1>
+
+    <h2>map()</h2>
+    <p>input : [1,2,3,4] </p>
+    <p id="mapResult"></p>
+    <button id="btnMap">Run map()</button>
+
+    <h2>merge()</h2>
+    <p>input : [1,2,3] [4,5,6]</p>
+    <p id="mergeResult"></p>
+    <button id="btnMerge">Run merge()</button>
+
+    <h2>each()</h2>
+    <ul id="eachList">
+        <li>Red</li>
+        <li>Green</li>
+        <li>Blue</li>
+    </ul>
+    <button id="btnEach">Run each()</button>
+
+    <h2>grep()</h2>
+    <p>input : [1,2,3,4,5,6]</p>
+    <p id="grepResult"></p>
+    <button id="btnGrep">Run grep()</button>
+
+    <h2>extend()</h2>
+    <p>input : {theme: 'light', fontSize: '16px'} {theme: 'dark'}</p>
+    <p id="extendResult"></p>
+    <button id="btnExtend">Run extend()</button>
+
+    <script src="../jQuery/jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            // map()
+            $('#btnMap').click(function () {
+                let numbers = [1, 2, 3, 4];
+                let squared = $.map(numbers, function (value) {
+                    return value * value;
+                });
+                $('#mapResult').text('Squared numbers: ' + squared);
+            });
+
+            // merge()
+            $('#btnMerge').click(function () {
+                let array1 = [1, 2, 3];
+                let array2 = [4, 5, 6];
+                let mergedArray = $.merge(array1, array2);
+                $('#mergeResult').text('Merged array: ' + array1);
+            });
+
+            // each()
+            $('#btnEach').click(function () {
+                $('#eachList li').each(function (index, element) {
+                    $(element).prepend(' Item - ' + (index + 1) + ' : ');
+                });
+            });
+
+            // grep()
+            $('#btnGrep').click(function () {
+                let numbers = [1, 2, 3, 4, 5, 6];
+                let evenNumbers = $.grep(numbers, function (value) {
+                    return value % 2 === 0;
+                },true);
+                $('#grepResult').text('Even numbers: ' + evenNumbers);
+            });
+
+            // extend()
+            $('#btnExtend').click(function () {
+                let defaultSettings = {
+                    theme: {color : 'light' , bg : 'dark'},
+                    fontSize: '16px'
+                };
+                let userSettings = {
+                    theme: {color : 'dark'}
+                };
+                let finalSettings = $.extend(true,{}, defaultSettings, userSettings);
+                $('#extendResult').text('Final settings: ' + JSON.stringify(finalSettings));
+            });
+        });
+    </script>
+</body>
+
+</html>

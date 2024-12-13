@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Events</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            margin: 10px;
+            text-align: center;
+            line-height: 200px;
+            border: 2px solid blue;
+        }
+
+        #formContainer {
+            margin: 10px 0;
+        }
+
+        #parent {
+            height: 100px;
+            width: 400px;
+            background-color: aqua;
+            margin: 10px;
+        }
+
+        #scrollDiv {
+            height: 100px;
+            overflow-y: scroll;
+            border: 1px solid gray;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>jQuery Events</h1>
+
+    <!-- Mouse Events -->
+    <h2>Mouse Events</h2>
+    <button id="btn">Click Me</button>
+    <div id="box">Hover or Move Mouse Here</div>
+
+    <!-- Keyboard Events -->
+    <h2>Keyboard Events</h2>
+    <input type="text" id="keyboardInput" placeholder="Type something...">
+
+    <!-- Form Events -->
+    <h2>Form Events</h2>
+    <div id="formContainer">
+        <form id="myForm">
+            <input type="text" id="input" placeholder="Focus and Blur" />
+            <select id="dropdown">
+                <option value="Option 1">Option 1</option>
+                <option value="Option 2">Option 2</option>
+                <option value="Option 3">Option 3</option>
+            </select>
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+
+    <!-- Document/Window Events -->
+    <h2>Document/Window Events</h2>
+    <div id="scrollDiv">
+        Scroll inside this box to see the scroll event in action.
+        <p>Content 1</p>
+        <p>Content 2</p>
+        <p>Content 3</p>
+        <p>Content 4</p>
+    </div>
+
+    <!-- Other Event Methods -->
+    <h2>Other Events</h2>
+    <a href="https://www.google.com" id="link">Prevent Default Link</a>
+    <div id="parent">
+        <div id="child" style="padding: 10px; border: 1px solid black; margin: 10px;">
+            Click Me (Stop Propagation)
+        </div>
+    </div>
+
+    <!-- fire event programmatically  -->
+    <h2>Fire event programmatically</h2>
+    <button id="custom">Focus</button>
+
+    <script src="../jQuery/jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("DOM is ready!");
+
+            // Mouse Events
+            $("#btn").click(function () { alert("Button clicked!"); });
+            $("#btn").off("click");
+            $("#btn").dblclick(function () { alert("Button double-clicked!"); });
+            $("#box").mouseenter(function () { console.log("Mouse entered the box!"); });
+            $("#box").mouseleave(function () { console.log("Mouse left the box!"); });
+            $("#box").hover(
+                function () { console.log("Mouse hovered over the box!"); },
+                function () { console.log("Mouse left the hover area!"); }
+            );
+            $("#btn").mousedown(function () { console.log("Mouse down on button!"); });
+            $("#btn").mouseup(function () { console.log("Mouse up on button!"); });
+            $("#box").mousemove(function (e) {
+                console.log("Mouse moved at X: " + e.pageX + ", Y: " + e.pageY);
+            });
+
+            // Keyboard Events
+            $(document).keydown(function (e) { console.log("Key pressed: " + e.key); });
+            $(document).keyup(function () { console.log("Key released!"); });
+
+            // Form Events
+            $("#input").focus(function () { $(this).css("background", "lightyellow"); });
+            $("#input").blur(function () { $(this).css("background", ""); });
+            $("#dropdown").change(function () { alert("Selected: " + $(this).val()); });
+            $("#myForm").submit(function (e) {
+                e.preventDefault();
+                alert("Form submitted!");
+            });
+
+            // Document/Window Events
+            $(window).resize(function () { console.log("Window resized!"); });
+            $(window).scroll(function () { console.log("Page scrolled!"); });
+            $("#scrollDiv").scroll(function () { console.log("Div scrolled!"); });
+
+            // Other Events
+            $("#btn").one("click", function () { alert("Clicked only once!"); });
+            $("#btn").on("hover", function () { console.log("hover On btn!"); });
+            $("#btn").off("hover"); // hover event removed
+            $("#link").click(function (e) {
+                e.preventDefault();
+                alert("Default prevented for the link!");
+            });
+            $("#child").click(function (e) {
+                e.stopPropagation();
+                alert("Child clicked, propagation stopped!");
+            });
+            $("#parent").click(function () {
+                alert("Parent clicked!");
+            });
+
+            // fire event programmatically 
+            // using trigger
+            $("#custom").click(function () {
+                $("#input").trigger("focus");
+            });
+            // using shorthand 
+            $("#custom").click(function () {
+                $("#input").focus();
+            });
+
+        });
+    </script>
+</body>
+
+</html>

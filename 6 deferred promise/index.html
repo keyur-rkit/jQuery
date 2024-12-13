@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Deferred and Promise</title>
+</head>
+
+<body>
+    <h1>jQuery Deferred and Promise</h1>
+
+    <h2>Deferred Object Example</h2>
+    <button id="btnDeferred">Run Deferred</button>
+    <p id="deferredResult"></p>
+
+    <h2>Promise Object Example</h2>
+    <button id="btnPromise">Run Promise</button>
+    <p id="promiseResult"></p>
+
+    <script src="../jQuery/jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Example 1: Using Deferred Object
+            $('#btnDeferred').click(function () {
+                function asyncOperation() {
+                    let deferred = $.Deferred();
+
+                    setTimeout(function () {
+                        let success = Math.random() > 0.5; // Random success/failure
+                        if (success) {
+                            deferred.resolve("Operation succeeded!");
+                        } else {
+                            deferred.reject("Operation failed.");
+                        }
+                    }, 1000);
+
+                    return deferred;
+                }
+
+                $('#deferredResult').text('Processing...');
+                asyncOperation()
+                    .done(function (message) {
+                        $('#deferredResult').text(message);
+                    })
+                    .fail(function (error) {
+                        $('#deferredResult').text(error);
+                    });
+            });
+
+            // Example 2: Using Promise Object
+            $('#btnPromise').click(function () {
+                function fetchData() {
+                    let deferred = $.Deferred();
+
+                    setTimeout(function () {
+                        deferred.resolve("Data fetched successfully!");
+                    }, 1500);
+
+                    return deferred.promise();
+                }
+
+                $('#promiseResult').text('Fetching data...');
+                let promise = fetchData();
+
+                promise
+                    .done(function (message) {
+                        $('#promiseResult').text(message);
+                    })
+                    .fail(function () {
+                        $('#promiseResult').text("Failed to fetch data.");
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>
